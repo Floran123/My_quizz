@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+
+    {% for categorie in categories %}
+        <input type="hidden" id="question1_idCategorie" name="question1[idCategorie]" value={{ categorie.id }}>
+    {% else %}
+        <tr>
+            <td colspan="3">no records found</td>
+        </tr>
+    {% endfor %}
+    {{ form_widget(form) }}
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

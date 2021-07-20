@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question index{% endblock %}
+
+{% block body %}
+
+    <h1>Quizz</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>ReponseId</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>  
+        <form method="POST" action="/question/reponse/result">      
+        {% for question in questions %}
+            <tr>
+                <td><p id = "question">{{ question.question }}
+                {% for reponse in question.getReponses() %}
+                     <p>{{ reponse.reponse }} <input type="radio" id="check1"  name="question{{question.id}}" value = "{{reponse.reponseExpected}}"></p> 
+
+                
+                {% endfor %}
+                </td>
+                
+                <td>
+                    <a href="{{ path('question_show', {'id': question.id}) }}">show</a>
+                    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
+
+
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('question_new') }}">Create new</a>
+<input type="submit" value="Envoyer le formulaire" >
+        </form>
+
+{% endblock %}

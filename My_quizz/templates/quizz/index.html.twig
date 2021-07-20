@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question index{% endblock %}
+
+{% block body %}
+    <h1>Question index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdCategorie</th>
+                <th>Question</th>
+                <th>ReponseId</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>{{ question.idCategorie }}</td>
+                <td>{{ question.question }}</td>
+                <td>{{ question.reponseId }}</td>
+                <td>
+                    <a href="{{ path('quizz_show', {'id': question.id}) }}">show</a>
+                    <a href="{{ path('quizz_edit', {'id': question.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.name }}</td>
+                <td>
+                    <a href="{{ path('categorie_show', {'id': categorie.id}) }}">show</a>
+                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('quizz_new') }}">Create new</a>
+{% endblock %}
